@@ -13,10 +13,13 @@ public class GamblingSimulation {
 
         int netResultOfGambling = 0;
 
-        int daysOfPlayInMonth = 20;
+        System.out.println("Enter the Number of Days of Gambling in a Month");
+        int daysOfPlayInMonth = scanner.nextInt();
 
         netResultOfGambling = bettingMonthResult(stakes, betAmount, maxSwing, daysOfPlayInMonth);
         System.out.println("Net Result of Gambling for " +daysOfPlayInMonth +"days of play =" +netResultOfGambling);
+
+        printBettingMonthRecord(stakes, betAmount, maxSwing, daysOfPlayInMonth);
 
     }
 
@@ -66,4 +69,19 @@ public class GamblingSimulation {
         }
         return netResultOfGambling;
     }
+
+    public static void printBettingMonthRecord(int stakes, int betAmount, int maxSwing, int daysOfPlayInMonth){
+        int[] bettingDaysRecord = new int[daysOfPlayInMonth];
+        for (int i = 0; i < daysOfPlayInMonth; i++){
+            int resultantValueAtTheEndOfDay =  bettingDayResult(stakes, betAmount, maxSwing);
+            int netProfitForTheDay = resultantValueAtTheEndOfDay - stakes;
+            bettingDaysRecord[i] = netProfitForTheDay;
+        }
+
+        System.out.println("Day\tWinnings or Losses");
+        for (int i = 0; i < daysOfPlayInMonth; i++){
+            System.out.println((i + 1) +"\t" +bettingDaysRecord[i]);
+        }
+    }
+
 }
