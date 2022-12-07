@@ -19,8 +19,7 @@ public class GamblingSimulation {
         netResultOfGambling = bettingMonthResult(stakes, betAmount, maxSwing, daysOfPlayInMonth);
         System.out.println("Net Result of Gambling for " +daysOfPlayInMonth +"days of play =" +netResultOfGambling);
 
-        printBettingMonthRecord(stakes, betAmount, maxSwing, daysOfPlayInMonth);
-
+        printLuckyAndUnluckyDays(printBettingMonthRecord(stakes, betAmount, maxSwing, daysOfPlayInMonth));
     }
 
     public static int bettingResult(int stakes, int betAmount){
@@ -70,7 +69,7 @@ public class GamblingSimulation {
         return netResultOfGambling;
     }
 
-    public static void printBettingMonthRecord(int stakes, int betAmount, int maxSwing, int daysOfPlayInMonth){
+    public static int[] printBettingMonthRecord(int stakes, int betAmount, int maxSwing, int daysOfPlayInMonth){
         int[] bettingDaysRecord = new int[daysOfPlayInMonth];
         for (int i = 0; i < daysOfPlayInMonth; i++){
             int resultantValueAtTheEndOfDay =  bettingDayResult(stakes, betAmount, maxSwing);
@@ -82,6 +81,29 @@ public class GamblingSimulation {
         for (int i = 0; i < daysOfPlayInMonth; i++){
             System.out.println((i + 1) +"\t" +bettingDaysRecord[i]);
         }
+
+        return bettingDaysRecord;
     }
 
+    public static void printLuckyAndUnluckyDays(int[] bettingDaysRecord){
+        int maxiximumWinningDay = 0;
+        int maximumWinningAmount = bettingDaysRecord[0];
+        int maxiximumLoosingDay = 0;
+        int maximumLoosingAmount = bettingDaysRecord[0];
+
+        for (int i = 1; i<bettingDaysRecord.length; i++){
+            if (bettingDaysRecord[i] > maximumWinningAmount){
+               maximumWinningAmount = bettingDaysRecord[i];
+               maxiximumWinningDay = i;
+            }
+
+            if (bettingDaysRecord[i] < maximumLoosingAmount){
+                maximumLoosingAmount = bettingDaysRecord[i];
+                maxiximumLoosingDay = i;
+            }
+        }
+
+        System.out.println("The Luckiest day is " +(maxiximumWinningDay+1) +" with a win of " +maximumWinningAmount);
+        System.out.println("The UnLuckiest day is " +(maxiximumLoosingDay+1) +" with a loss of " +maximumLoosingAmount);
+    }
 }
