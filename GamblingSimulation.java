@@ -11,7 +11,12 @@ public class GamblingSimulation {
 
         int maxSwing = (int)((swingPercentage*1.0/100.0)*stakes);
 
-        int resultantValueAtTheEndOfDay =  bettingDayResult(stakes, betAmount, maxSwing);
+        int netResultOfGambling = 0;
+
+        int daysOfPlayInMonth = 20;
+
+        netResultOfGambling = bettingMonthResult(stakes, betAmount, maxSwing, daysOfPlayInMonth);
+        System.out.println("Net Result of Gambling for " +daysOfPlayInMonth +"days of play =" +netResultOfGambling);
 
     }
 
@@ -48,9 +53,17 @@ public class GamblingSimulation {
                 downSwing++;
             }
         }
-        System.out.println("Upswing is = " +upSwing);
-        System.out.println("Downswing is = " +downSwing);
-        System.out.println("Current Holding Value is = " +currentHoldingValue);
+
         return currentHoldingValue;
+    }
+
+    public static int bettingMonthResult(int stakes, int betAmount, int maxSwing, int daysOfPlayInMonth){
+        int netResultOfGambling = 0;
+        for (int i = 1; i <= daysOfPlayInMonth; i++){
+            int resultantValueAtTheEndOfDay =  bettingDayResult(stakes, betAmount, maxSwing);
+            int netProfitForTheDay = resultantValueAtTheEndOfDay - stakes;
+            netResultOfGambling = netResultOfGambling + netProfitForTheDay;
+        }
+        return netResultOfGambling;
     }
 }
