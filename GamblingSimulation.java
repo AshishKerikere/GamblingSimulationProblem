@@ -19,7 +19,7 @@ public class GamblingSimulation {
         netResultOfGambling = bettingMonthResult(stakes, betAmount, maxSwing, daysOfPlayInMonth);
         System.out.println("Net Result of Gambling for " +daysOfPlayInMonth +"days of play =" +netResultOfGambling);
 
-        printLuckyAndUnluckyDays(printBettingMonthRecord(stakes, betAmount, maxSwing, daysOfPlayInMonth));
+        determineToPlayNextMonth(netResultOfGambling);
     }
 
     public static int bettingResult(int stakes, int betAmount){
@@ -105,5 +105,14 @@ public class GamblingSimulation {
 
         System.out.println("The Luckiest day is " +(maxiximumWinningDay+1) +" with a win of " +maximumWinningAmount);
         System.out.println("The UnLuckiest day is " +(maxiximumLoosingDay+1) +" with a loss of " +maximumLoosingAmount);
+    }
+
+    public static void determineToPlayNextMonth(int netResultOfGambling ) {
+        if (netResultOfGambling > 0){
+            System.out.println("Continue Playing Next Month");
+        }
+        else {
+            System.out.println("Stop Playing Next Month");
+        }
     }
 }
